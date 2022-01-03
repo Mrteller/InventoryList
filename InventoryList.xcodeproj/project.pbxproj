@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1039CF6C27836E3600EAA974 /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039CF6B27836E3600EAA974 /* InventoryItem.swift */; };
+		1039CF7027836FDE00EAA974 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039CF6F27836FDE00EAA974 /* Storage.swift */; };
 		DA264F25278356100088D98A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F24278356100088D98A /* AppDelegate.swift */; };
 		DA264F27278356100088D98A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F26278356100088D98A /* SceneDelegate.swift */; };
 		DA264F29278356100088D98A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F28278356100088D98A /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1039CF6B27836E3600EAA974 /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
+		1039CF6F27836FDE00EAA974 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		DA264F21278356100088D98A /* InventoryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InventoryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA264F24278356100088D98A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA264F26278356100088D98A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1039CF6A27836E1700EAA974 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1039CF6B27836E3600EAA974 /* InventoryItem.swift */,
+				1039CF6F27836FDE00EAA974 /* Storage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DA264F18278356100088D98A = {
 			isa = PBXGroup;
 			children = (
@@ -60,7 +73,7 @@
 		DA264F23278356100088D98A /* InventoryList */ = {
 			isa = PBXGroup;
 			children = (
-				DA264F3D278358670088D98A /* Model */,
+				1039CF6A27836E1700EAA974 /* Model */,
 				DA264F382783562A0088D98A /* ViewControllers */,
 				DA264F39278357AE0088D98A /* Storyboards */,
 				DA264F3B278358040088D98A /* SupportingFiles */,
@@ -104,13 +117,6 @@
 				DA264F32278356130088D98A /* Info.plist */,
 			);
 			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		DA264F3D278358670088D98A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		DA264F40278359020088D98A /* AuxiliaryFiles */ = {
@@ -193,8 +199,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA264F42278359E80088D98A /* HomeViewController.swift in Sources */,
+				1039CF6C27836E3600EAA974 /* InventoryItem.swift in Sources */,
 				DA264F29278356100088D98A /* ViewController.swift in Sources */,
 				DA264F25278356100088D98A /* AppDelegate.swift in Sources */,
+				1039CF7027836FDE00EAA974 /* Storage.swift in Sources */,
 				DA264F3F278358E50088D98A /* UIViewController+.swift in Sources */,
 				DA264F27278356100088D98A /* SceneDelegate.swift in Sources */,
 			);
