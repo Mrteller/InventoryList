@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  ContactsTableView
+//  InventoryList
 //
 //  Created by  Paul on 28.12.2021.
 //
@@ -9,12 +9,15 @@ import UIKit
 
 class HomeViewController: UITabBarController {
     
+    // MARK: - Private vars
     
-    let storage = Storage()
+    private let storage = Storage()
+    
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadDataIntoControllers()
         
         // получаем предмет по имени
         if let item = storage.getItem(name: "macbook") {
@@ -51,6 +54,14 @@ class HomeViewController: UITabBarController {
         
         
         
+    }
+    
+    // MARK: - Private funcs
+    
+    private func loadDataIntoControllers() {
+        if let itemsController = firstContentControllerOf(type: ItemsViewController.self)  {
+            itemsController.items = storage.items
+        }
     }
     
 }

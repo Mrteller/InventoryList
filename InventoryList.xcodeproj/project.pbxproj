@@ -11,12 +11,12 @@
 		1039CF7027836FDE00EAA974 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1039CF6F27836FDE00EAA974 /* Storage.swift */; };
 		DA264F25278356100088D98A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F24278356100088D98A /* AppDelegate.swift */; };
 		DA264F27278356100088D98A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F26278356100088D98A /* SceneDelegate.swift */; };
-		DA264F29278356100088D98A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F28278356100088D98A /* ViewController.swift */; };
 		DA264F2C278356100088D98A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA264F2A278356100088D98A /* Main.storyboard */; };
 		DA264F2E278356130088D98A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA264F2D278356130088D98A /* Assets.xcassets */; };
 		DA264F31278356130088D98A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA264F2F278356130088D98A /* LaunchScreen.storyboard */; };
 		DA264F3F278358E50088D98A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F3E278358E50088D98A /* UIViewController+.swift */; };
 		DA264F42278359E80088D98A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F41278359E80088D98A /* HomeViewController.swift */; };
+		DA72E7B2278474A700F9A0AC /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72E7B1278474A700F9A0AC /* ItemsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,13 +25,13 @@
 		DA264F21278356100088D98A /* InventoryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InventoryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA264F24278356100088D98A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA264F26278356100088D98A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DA264F28278356100088D98A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DA264F2B278356100088D98A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA264F2D278356130088D98A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA264F30278356130088D98A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA264F32278356130088D98A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA264F3E278358E50088D98A /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DA264F41278359E80088D98A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DA72E7B1278474A700F9A0AC /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				DA264F41278359E80088D98A /* HomeViewController.swift */,
-				DA264F28278356100088D98A /* ViewController.swift */,
+				DA72E7B1278474A700F9A0AC /* ItemsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -199,8 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA264F42278359E80088D98A /* HomeViewController.swift in Sources */,
+				DA72E7B2278474A700F9A0AC /* ItemsViewController.swift in Sources */,
 				1039CF6C27836E3600EAA974 /* InventoryItem.swift in Sources */,
-				DA264F29278356100088D98A /* ViewController.swift in Sources */,
 				DA264F25278356100088D98A /* AppDelegate.swift in Sources */,
 				1039CF7027836FDE00EAA974 /* Storage.swift in Sources */,
 				DA264F3F278358E50088D98A /* UIViewController+.swift in Sources */,
