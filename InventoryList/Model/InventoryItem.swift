@@ -17,7 +17,7 @@ class InventoryItem: CustomStringConvertible {
     var quantity: Int
     var location: String
     let image: UIImage
-    
+    var specification: String?
     
     init(name: String, quantity: Int, location: String, image: UIImage) {
         itemName = name
