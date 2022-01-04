@@ -53,8 +53,11 @@ class ItemsViewController: UITableViewController {
             configuration.text = "Место"
             configuration.secondaryText = items[indexPath.section].location
         default:
-            configuration.text = "Количество"
-            configuration.secondaryText = String(items[indexPath.section].quantity)
+//            configuration.text = "Количество"
+//            configuration.secondaryText = String(items[indexPath.section].quantity)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "amountCell", for: indexPath) as! AmountCell
+            cell.configureWith(value: items[indexPath.section].quantity, stepperHandler: stepperHandler())
+            return cell
         }
         cell.contentConfiguration = configuration
         return cell
@@ -64,5 +67,21 @@ class ItemsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showItemInfo", sender: items[indexPath.section])
     }
+    
+    // MARK: - Private funcs
+    
+    private func stepperHandler() -> StepperHandler {
+        return { [unowned self] cell, value in
+            guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+            items[indexPath.section].quantity = value
 
+            reloadCell(at: indexPath)
+        }
+    }
+
+    private func reloadCell(at indexPath: IndexPath) {
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
 }
