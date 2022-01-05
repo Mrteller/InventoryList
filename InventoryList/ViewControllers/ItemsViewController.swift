@@ -12,73 +12,80 @@ class ItemsViewController: UITableViewController {
     
     // MARK: - Public vars
     
-    var items = [InventoryItem]()
+    var storage = Storage()
     
     // MARK: - Lifecycle methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell")
+    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showItemInfo",
-//           let item = sender as? InventoryItem,
-//           let contactsInfoVC = segue.destination as? ItemInfoViewController {
-//            contactsInfoVC.item = item
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editItem",
+           let sku = sender as? String,
+           let editVC = segue.destination as? EditViewController {
+            editVC.sku = sku
+            editVC.storage = storage
+            
+        }
+    }
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        items.count
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        return storage.items.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        items[section].itemName
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
-        var configuration = cell.defaultContentConfiguration()
-        switch indexPath.row {
-        case 0:
-            configuration.text = items[indexPath.section].description
-            configuration.image = items[indexPath.section].image
-            configuration.imageProperties.maximumSize = CGSize(width: 40, height: 40)
-        case 1:
-            configuration.text = "Спецификация"
-            configuration.secondaryText = items[indexPath.section].specification
-        case 2:
-            configuration.text = "Место"
-            configuration.secondaryText = items[indexPath.section].location
-        default:
-//            configuration.text = "Количество"
-//            configuration.secondaryText = String(items[indexPath.section].quantity)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "amountCell", for: indexPath) as! AmountCell
-            cell.configureWith(value: items[indexPath.section].quantity, stepperHandler: stepperHandler())
-            return cell
-        }
-        cell.contentConfiguration = configuration
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        let item = storage.items[indexPath.row]
+        cell.itemImageView.image = item.image
+        cell.nameLabel.text = item.itemName
+        cell.quantityLabel.text = String("Количество: \(item.quantity) шт")
+        cell.locationLabel.text = "Место: " + item.location
+        cell.skuLabel.text = "SKU: " + String(item.sku)
+        cell.sku = item.sku
+        cell.storage = storage
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showItemInfo", sender: items[indexPath.section])
+    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            print("Delete Pressed", action)
+            guard let cell = tableView.cellForRow(at: indexPath) as? ItemCell else { return }
+            do {
+                try self.storage.deleteItem(sku: cell.sku)
+            } catch {
+                print(error.localizedDescription)
+            }
+            tableView.reloadData()
+        }
+        delete.backgroundColor =  UIColor.red
+        
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completion) in
+            print("Edit Pressed", action)
+            guard let cell = tableView.cellForRow(at: indexPath) as? ItemCell else { return }
+            self.performSegue(withIdentifier: "editItem", sender: cell.sku)
+        }
+        edit.backgroundColor = UIColor.green
+        
+        let config = UISwipeActionsConfiguration(actions: [delete, edit])
+        config.performsFirstActionWithFullSwipe = false
+        
+        return config
     }
+    
+    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        tableView.deselectRow(at: indexPath, animated: true)
+    //        //        let sku = storage.items[indexPath.row].sku
+    //        //        performSegue(withIdentifier: "showItemInfo", sender: sku)
+    //    }
     
     // MARK: - Private funcs
     
-    private func stepperHandler() -> StepperHandler {
-        return { [unowned self] cell, value in
-            guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-            items[indexPath.section].quantity = value
-
-            reloadCell(at: indexPath)
-        }
-    }
-
     private func reloadCell(at indexPath: IndexPath) {
         tableView.beginUpdates()
         tableView.reloadRows(at: [indexPath], with: .automatic)

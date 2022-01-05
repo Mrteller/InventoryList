@@ -10,7 +10,7 @@ import UIKit
 class InventoryItem: CustomStringConvertible {
     
     var description: String {
-        String("item name: \(itemName), quantity: \(quantity), location: \(location)")
+        String("item name: \(itemName), quantity: \(quantity), location: \(location), sku: \(sku)")
     }
 
     let itemName: String
@@ -18,12 +18,14 @@ class InventoryItem: CustomStringConvertible {
     var location: String
     let image: UIImage
     var specification: String?
+    var sku: String
     
-    init(name: String, quantity: Int, location: String, image: UIImage) {
+    init(name: String, quantity: Int, location: String, image: UIImage, sku: String) {
         itemName = name
         self.quantity = quantity
         self.location = location
         self.image = image
+        self.sku = sku
     }
     
 }
