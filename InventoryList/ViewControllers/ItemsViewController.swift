@@ -123,6 +123,7 @@ class ItemsViewController: UITableViewController {
     
     private func filterRows(for searchText: String) {
         filteredItems = storage.items.filter{
+            // TODO: add more fields to include in search
             $0.itemName.lowercased().contains(searchText.lowercased()) ||
             $0.location.lowercased().contains(searchText.lowercased())
         }
