@@ -207,7 +207,7 @@
                                                                         <action selector="quantityDidEndEditing:" destination="f8S-Hy-t9S" eventType="editingDidEnd" id="EuM-Mm-fPr"/>
                                                                     </connections>
                                                                 </textField>
-                                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-r4-bR4">
+                                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" maximumValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-r4-bR4">
                                                                     <rect key="frame" x="280" y="7.5" width="94" height="32"/>
                                                                     <connections>
                                                                         <action selector="quantityStepperValueChanged:" destination="f8S-Hy-t9S" eventType="valueChanged" id="LdK-vC-uHz"/>

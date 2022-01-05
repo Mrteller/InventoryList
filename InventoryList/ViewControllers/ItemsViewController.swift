@@ -14,11 +14,21 @@ class ItemsViewController: UITableViewController {
     
     var storage = Storage()
     
+    // MARK: - Private vars
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    private var filteredItems = [InventoryItem]()
+    private var itemsInTable : [InventoryItem] { // A subset of items to display in tableView
+        return (searchController.isActive && searchController.searchBar.text != "") ? filteredItems : storage.items
+    }
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell")
+        setupSearchController(placeholder: NSLocalizedString("Search items", comment: "placeholder"), hideWhenAppear: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +49,12 @@ class ItemsViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storage.items.count
+        return itemsInTable.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
-        let item = storage.items[indexPath.row]
+        let item = itemsInTable[indexPath.row]
         cell.itemImageView.image = item.image
         cell.nameLabel.text = item.itemName
         cell.quantityLabel.text = String("Количество: \(item.quantity) шт")
@@ -85,7 +95,7 @@ class ItemsViewController: UITableViewController {
     
     //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //        tableView.deselectRow(at: indexPath, animated: true)
-    //        //        let sku = storage.items[indexPath.row].sku
+    //        //        let sku = itemsInTable[indexPath.row].sku
     //        //        performSegue(withIdentifier: "showItemInfo", sender: sku)
     //    }
     
@@ -96,4 +106,36 @@ class ItemsViewController: UITableViewController {
 //        tableView.reloadRows(at: [indexPath], with: .automatic)
 //        tableView.endUpdates()
 //    }
+    
+    // MARK: SearchController for filtering items
+    private func setupSearchController(placeholder: String = "", hideWhenAppear: Bool = true) {
+        definesPresentationContext = true
+        // searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        // searchController.searchBar.barTintColor = UIColor(white: 0.9, alpha: 0.4)
+        searchController.searchBar.placeholder = placeholder
+        searchController.hidesNavigationBarDuringPresentation = false
+        tableView.tableHeaderView = searchController.searchBar
+        if hideWhenAppear {
+            tableView.contentOffset = CGPoint(x: 0, y: searchController.searchBar.frame.height)
+        }
+    }
+    
+    private func filterRows(for searchText: String) {
+        filteredItems = storage.items.filter{
+            $0.itemName.lowercased().contains(searchText.lowercased()) ||
+            $0.location.lowercased().contains(searchText.lowercased())
+        }
+        tableView.reloadData()
+    }
+}
+
+extension ItemsViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterRows(for: searchText)
+        }
+    }
+    
 }
