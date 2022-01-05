@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditViewController: UITableViewController {
+class EditViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - @IBOutlets
     
@@ -40,6 +40,12 @@ class EditViewController: UITableViewController {
         updateItem()
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        itemImageView.image = image
+        picker.dismiss(animated: true)
+    }
+    
     // MARK: - @IBActions
     
     @IBAction func quantityStepperValueChanged(_ sender: UIStepper) {
@@ -53,6 +59,14 @@ class EditViewController: UITableViewController {
             sender.text = String(Int(quantityStepper.value))
         }
     }
+    
+    @IBAction func changeImage() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
     
     // MARK: - Private funcs
     
