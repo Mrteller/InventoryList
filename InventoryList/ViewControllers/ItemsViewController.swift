@@ -15,10 +15,15 @@ class ItemsViewController: UITableViewController {
     var storage = Storage()
     
     // MARK: - Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -27,7 +32,7 @@ class ItemsViewController: UITableViewController {
            let editVC = segue.destination as? EditViewController {
             editVC.sku = sku
             editVC.storage = storage
-            
+            editVC.title = "Edit"
         }
     }
     
@@ -58,10 +63,10 @@ class ItemsViewController: UITableViewController {
             guard let cell = tableView.cellForRow(at: indexPath) as? ItemCell else { return }
             do {
                 try self.storage.deleteItem(sku: cell.sku)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
             } catch {
                 print(error.localizedDescription)
             }
-            tableView.reloadData()
         }
         delete.backgroundColor =  UIColor.red
         
@@ -86,9 +91,9 @@ class ItemsViewController: UITableViewController {
     
     // MARK: - Private funcs
     
-    private func reloadCell(at indexPath: IndexPath) {
-        tableView.beginUpdates()
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-        tableView.endUpdates()
-    }
+//    private func reloadCell(at indexPath: IndexPath) {
+//        tableView.beginUpdates()
+//        tableView.reloadRows(at: [indexPath], with: .automatic)
+//        tableView.endUpdates()
+//    }
 }
