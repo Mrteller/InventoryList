@@ -28,9 +28,12 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        specificationTextView.layer.cornerRadius = 5
+        specificationTextView.layer.cornerRadius = 10
         specificationTextView.layer.borderWidth = 0.5
         specificationTextView.layer.borderColor = UIColor.lightGray.cgColor
+        itemImageView.layer.cornerRadius = specificationTextView.layer.cornerRadius
+        itemImageView.layer.borderWidth = specificationTextView.layer.borderWidth
+        itemImageView.layer.borderColor = specificationTextView.layer.borderColor
         updateUI()
         hideKeyboardOnTapAround()
     }
@@ -60,8 +63,13 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
         }
     }
     
-    @IBAction func changeImage() {
+    @IBAction func changeImage(sender: UIButton) {
         let picker = UIImagePickerController()
+        if sender.tag == 2 {
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            picker.sourceType = .camera
+        }
+        
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
