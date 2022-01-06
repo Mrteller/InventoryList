@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class EditViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -67,6 +68,20 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
         let picker = UIImagePickerController()
         if sender.tag == 2 {
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+            switch cameraAuthorizationStatus {
+            case .notDetermined:
+                requestCameraPermission()
+                return
+            case .authorized:
+                break
+            case .restricted, .denied:
+                alertCameraAccessNeeded()
+                return
+            @unknown default:
+                return
+            }
             picker.sourceType = .camera
         }
         
@@ -112,6 +127,31 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
     
     @objc private func hideKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func requestCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { [weak self] accessGranted in
+            if !accessGranted {
+                DispatchQueue.main.async {
+                    self?.alertCameraAccessNeeded()
+                }
+            }
+        }
+    }
+    
+    private  func alertCameraAccessNeeded() {
+        guard let settingsAppURL = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(settingsAppURL) else { return } // This should never happen
+        let alert = UIAlertController(
+            title: "Need Camera Access",
+            message: "Camera access is required to take pictures of item.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+        alert.addAction(UIAlertAction(title: "Allow Camera", style: .cancel) { _ in
+            UIApplication.shared.open(settingsAppURL, options: [:])
+        })
+        present(alert, animated: true)
     }
     
 }
