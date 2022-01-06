@@ -109,10 +109,7 @@ class ItemsViewController: UITableViewController {
     
     // MARK: SearchController for filtering items
     private func setupSearchController(placeholder: String = "", hideWhenAppear: Bool = true) {
-        definesPresentationContext = true
-        // searchController.dimsBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
-        // searchController.searchBar.barTintColor = UIColor(white: 0.9, alpha: 0.4)
         searchController.searchBar.placeholder = placeholder
         searchController.hidesNavigationBarDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
