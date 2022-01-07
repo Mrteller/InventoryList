@@ -17,6 +17,8 @@ class Storage {
     ]
     
     
+    var trashItems: [InventoryItem] = []
+    
     // add new item
     func addNewItem(item: InventoryItem) throws {
         if items.contains(where: { $0.sku == item.sku }) {
@@ -31,10 +33,21 @@ class Storage {
         if let index = items.firstIndex(where: { $0.sku == sku }) {
             let item = items[index]
             return item
+        } else if let index = trashItems.firstIndex(where: { $0.sku == sku }) {
+            let item = trashItems[index]
+            return item
         }
         return nil
     }
     
+    //get item from SKU
+    func editItem(sku: String, editedItem: InventoryItem) {
+        if let index = items.firstIndex(where: { $0.sku == sku }) {
+            items[index] = editedItem
+        } else if let index = trashItems.firstIndex(where: { $0.sku == sku }) {
+            trashItems[index] = editedItem
+        }
+    }
     
     // get quantity by SKU
     func removeQuantity(sku: String, quantity: Int) throws {
@@ -61,9 +74,30 @@ class Storage {
     // delete item by SKU
     func deleteItem(sku: String) throws {
         if let itemIndex = items.firstIndex(where: { $0.sku == sku }) {
+            trashItems.append(items[itemIndex])
             items.remove(at: itemIndex)
         } else {
             throw NSError(domain: "нет предмета с таким SKU на складе", code: 3)
+        }
+        
+    }
+    
+    // restore item from trash by SKU
+    func restoreItem(sku: String) throws {
+        if let itemIndex = trashItems.firstIndex(where: { $0.sku == sku }) {
+            items.append(trashItems[itemIndex])
+            trashItems.remove(at: itemIndex)
+        } else {
+            throw NSError(domain: "нет предмета с таким SKU в корзине", code: 4)
+        }
+        
+    }
+    
+    func deleteItemFromTrash(sku: String) throws {
+        if let itemIndex = trashItems.firstIndex(where: { $0.sku == sku }) {
+            trashItems.remove(at: itemIndex)
+        } else {
+            throw NSError(domain: "нет предмета с таким SKU в корзине", code: 3)
         }
         
     }

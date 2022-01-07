@@ -25,6 +25,7 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
     var sku: String = ""
     weak var storage: Storage!
     
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -103,12 +104,11 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
             item.specification = text
             
         }
-        guard let itemIndex = storage.items.firstIndex(where: { $0.sku == sku }) else { return }
-        storage.items[itemIndex] = item
+        storage.editItem(sku: sku, editedItem: item)
     }
     
     private func updateUI() {
-        guard let item = storage.items.first(where: { $0.sku == sku }) else { return }
+        guard let item = storage.getItem(sku: sku) else { return }
         nameTextField.text = item.itemName
         quantityTextField.text = String(item.quantity)
         quantityStepper.value = Double(item.quantity)
