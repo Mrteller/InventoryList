@@ -45,6 +45,7 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
         updateItem()
     }
     
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         itemImageView.image = image
