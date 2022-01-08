@@ -26,6 +26,7 @@ class TrashViewController: UITableViewController {
         return (searchController.isActive && searchController.searchBar.text != "") ? filteredItems : storage.trashItems
     }
     
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class TrashViewController: UITableViewController {
         setupSearchController(placeholder: NSLocalizedString("Search items", comment: "placeholder"), hideWhenAppear: true)
         
         //set UIContextualAction Image to black color
-        UIImageView.appearance(whenContainedInInstancesOf: [UITableView.self]).tintColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        UIImageView.appearance(whenContainedInInstancesOf: [UITableView.self]).tintColor = .black
         
         tableView.allowsSelection = false
         tableView.allowsMultipleSelection = false

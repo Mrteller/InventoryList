@@ -30,7 +30,7 @@ class ItemsViewController: UITableViewController {
         setupSearchController(placeholder: NSLocalizedString("Search items", comment: "placeholder"), hideWhenAppear: true)
         
         //set UIContextualAction Image to black color
-        UIImageView.appearance(whenContainedInInstancesOf: [UITableView.self]).tintColor = UIColor.init(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        UIImageView.appearance(whenContainedInInstancesOf: [UITableView.self]).tintColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +39,14 @@ class ItemsViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let editVC = segue.destination as? EditViewController else { return }
+        editVC.storage = storage
         if segue.identifier == "editItem",
-           let sku = sender as? String,
-           let editVC = segue.destination as? EditViewController {
+           let sku = sender as? String {
             editVC.sku = sku
-            editVC.storage = storage
             editVC.title = "Edit"
+        } else if segue.identifier == "addItem" {
+            editVC.title = "Add"
         }
     }
     

@@ -21,7 +21,13 @@
                             <outlet property="delegate" destination="PhN-FJ-MSJ" id="D4X-XL-qsc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="List" id="wzw-gv-62t"/>
+                    <navigationItem key="navigationItem" title="List" id="wzw-gv-62t">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7Nr-H0-g1N">
+                            <connections>
+                                <segue destination="f8S-Hy-t9S" kind="show" identifier="addItem" id="f7A-kF-8W5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="f8S-Hy-t9S" kind="show" identifier="editItem" id="A45-R0-9VK"/>
                     </connections>
@@ -301,7 +307,18 @@
                             </tableViewSection>
                         </sections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Oqy-N2-eyC"/>
+                    <navigationItem key="navigationItem" id="Oqy-N2-eyC">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Abq-mQ-Gmq">
+                            <connections>
+                                <action selector="cancel:" destination="f8S-Hy-t9S" id="w9j-tE-NXl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="b1d-8B-iML">
+                            <connections>
+                                <action selector="save:" destination="f8S-Hy-t9S" id="Vfy-AO-qmr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="itemImageView" destination="Jvv-f3-sHs" id="pLX-Y1-ky3"/>
                         <outlet property="locationTextField" destination="Vm0-jJ-ocx" id="waM-wR-TLj"/>
@@ -408,7 +425,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ELo-OX-tks"/>
+        <segue reference="f7A-kF-8W5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>

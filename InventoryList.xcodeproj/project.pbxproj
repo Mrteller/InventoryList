@@ -21,6 +21,7 @@
 		DA264F3F278358E50088D98A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F3E278358E50088D98A /* UIViewController+.swift */; };
 		DA264F42278359E80088D98A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA264F41278359E80088D98A /* HomeViewController.swift */; };
 		DA72E7B2278474A700F9A0AC /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72E7B1278474A700F9A0AC /* ItemsViewController.swift */; };
+		DA81AA0B278A0866000A0F63 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81AA0A278A0866000A0F63 /* UIAlertController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		DA264F3E278358E50088D98A /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DA264F41278359E80088D98A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA72E7B1278474A700F9A0AC /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		DA81AA0A278A0866000A0F63 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				DA264F3E278358E50088D98A /* UIViewController+.swift */,
+				DA81AA0A278A0866000A0F63 /* UIAlertController+.swift */,
 			);
 			path = AuxiliaryFiles;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				DA264F3F278358E50088D98A /* UIViewController+.swift in Sources */,
 				DA264F27278356100088D98A /* SceneDelegate.swift in Sources */,
 				10BBC0F2278536B60082B6ED /* EditViewController.swift in Sources */,
+				DA81AA0B278A0866000A0F63 /* UIAlertController+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

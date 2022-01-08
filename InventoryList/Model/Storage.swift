@@ -20,7 +20,7 @@ class Storage {
     var trashItems: [InventoryItem] = []
     
     // add new item
-    func addNewItem(item: InventoryItem) throws {
+    func addNew(_ item: InventoryItem) throws {
         if items.contains(where: { $0.sku == item.sku }) {
             throw NSError(domain: "на складе уже есть предмет с таким SKU", code: 2)
         } else {
@@ -28,7 +28,7 @@ class Storage {
         }
     }
     
-    //get item from SKU
+    // get item from SKU
     func getItem(sku: String) -> InventoryItem? {
         if let index = items.firstIndex(where: { $0.sku == sku }) {
             let item = items[index]
@@ -40,8 +40,8 @@ class Storage {
         return nil
     }
     
-    //get item from SKU
-    func editItem(sku: String, editedItem: InventoryItem) {
+    // edit item from SKU
+    func edit(sku: String, editedItem: InventoryItem) {
         if let index = items.firstIndex(where: { $0.sku == sku }) {
             items[index] = editedItem
         } else if let index = trashItems.firstIndex(where: { $0.sku == sku }) {
@@ -68,7 +68,6 @@ class Storage {
         } else {
             throw NSError(domain: "нет предмета с таким SKU на складе", code: 3)
         }
-        
     }
     
     // delete item by SKU
@@ -79,7 +78,6 @@ class Storage {
         } else {
             throw NSError(domain: "нет предмета с таким SKU на складе", code: 3)
         }
-        
     }
     
     // restore item from trash by SKU
@@ -90,7 +88,6 @@ class Storage {
         } else {
             throw NSError(domain: "нет предмета с таким SKU в корзине", code: 4)
         }
-        
     }
     
     func deleteItemFromTrash(sku: String) throws {
@@ -99,9 +96,18 @@ class Storage {
         } else {
             throw NSError(domain: "нет предмета с таким SKU в корзине", code: 3)
         }
-        
+    }
+    
+    func validateNew(_ item: InventoryItem) -> Validity {
+        if item.sku.isEmpty { return .invalid(reason: "SKU is empty") }
+        if items.contains(where: { $0.sku == item.sku})  { return .invalid(reason: "Item with this SKU already exists") }
+        if trashItems.contains(where: { $0.sku == item.sku})  { return .invalid(reason: "Item with this SKU already exists in trash bin") }
+        return .valid
     }
     
 }
 
-
+enum Validity {
+    case valid
+    case invalid(reason: String)
+}
