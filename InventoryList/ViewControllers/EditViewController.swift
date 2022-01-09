@@ -95,6 +95,12 @@ class EditViewController: UITableViewController, UIImagePickerControllerDelegate
         if updateItem() { navigationController?.popViewController(animated: true) }
     }
     
+    @IBAction func unwindToEditScreen(segue: UIStoryboardSegue) {
+        if let codeScannerVC = segue.source as? CodeScannerController {
+            skuTextField.text = codeScannerVC.messageLabel.text
+        }
+    }
+    
     
     // MARK: - Private funcs
     
