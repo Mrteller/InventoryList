@@ -117,7 +117,7 @@ class CodeScannerController: UIViewController {
     
     private func recognized(code: String) {
         
-        guard presentedViewController != nil else { return }
+        guard presentedViewController == nil else { return }
         
         captureSession.stopRunning()
         messageLabel.text = code
